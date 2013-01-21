@@ -1,0 +1,43 @@
+<template name="details">
+  <div class="details">
+    {{#if party}}
+      {{#with party}}
+        <h1>{{title}}</h1>
+
+        <div class="description">{{description}}</div>
+
+        {{> attendance}}
+
+        <div class="rsvp-buttons">
+          {{#if currentUser}}
+            <input type="button" value="I'm going!"
+                   class="btn btn-small rsvp_yes {{maybeChosen "yes"}}">
+            <input type="button" value="Maybe"
+                   class="btn btn-small rsvp_maybe {{maybeChosen "maybe"}}">
+            <input type="button" value="No"
+                   class="btn btn-small rsvp_no {{maybeChosen "no"}}">
+          {{else}}
+            <i>Sign in to RSVP for this party.</i>
+          {{/if}}
+          <p><small>Posted by {{creatorName}}</small></p>
+        </div>
+
+        {{#if canRemove}}
+          <div class="alert alert-info"><small>
+              You posted this party and nobody is signed up to go, so if
+              you like, you could
+              <b><a href="#" class="remove">delete this listing</a></b>.
+          </small></div>
+        {{/if}}
+      {{/with}}
+    {{else}}
+      <h1 class="muted pagination-centered">
+        {{#if anyParties}}
+          Click a party to select it
+        {{else}}
+          Sign in and double click the map to post a party
+        {{/if}}
+      </h1>
+    {{/if}}
+  </div>
+</template>

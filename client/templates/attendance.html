@@ -1,0 +1,45 @@
+<template name="attendance">
+  <div class="attendance well well-small">
+    <div class="muted who"><b>Who</b></div>
+    {{#if public}}
+      <div>
+        <b>Everyone</b>
+        <span class="label label-inverse pull-right">Invited</span>
+      </div>
+    {{/if}}
+
+    {{#each rsvps}}
+      <div>
+        {{rsvpName}}
+        {{#if rsvpIs "yes"}}
+          <span class="label label-success pull-right">Going</span>
+        {{/if}}
+        {{#if rsvpIs "maybe"}}
+          <span class="label label-info pull-right">Maybe</span>
+        {{/if}}
+        {{#if rsvpIs "no"}}
+          <span class="label label pull-right">No</span>
+        {{/if}}
+      </div>
+    {{/each}}
+
+    {{#unless public}}
+      {{#each outstandingInvitations}}
+        <div>
+          {{invitationName}}
+          <span class="label label-inverse pull-right">Invited</span>
+        </div>
+      {{/each}}
+    {{/unless}}
+
+    {{#if nobody}}
+      <div>Nobody.</div>
+    {{/if}}
+
+    {{#if canInvite}}
+      <div class="invite">
+        <a href="#" class="btn btn-mini invite">Invite people</a>
+      </div>
+    {{/if}}
+  </div>
+</template>

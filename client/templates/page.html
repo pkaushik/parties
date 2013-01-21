@@ -1,0 +1,37 @@
+<template name="page">
+  {{#if showCreateDialog}}
+    {{> createDialog}}
+  {{/if}}
+
+  {{#if showInviteDialog}}
+    {{> inviteDialog}}
+  {{/if}}
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="nav pull-right">
+          {{> loginButtons}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="header row">
+      <h3 style="margin-bottom: 10px;">All Tomorrow's Parties</h3>
+      <div class="row">
+        <div class="span6">
+          {{> map}}
+          {{#if currentUser}}
+          <div class="pagination-centered">
+            <em><small>Double click the map to post a party!</small></em>
+          </div>
+          {{/if}}
+        </div>
+        <div class="span4">
+          {{> details}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
