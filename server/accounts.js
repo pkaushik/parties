@@ -5,8 +5,8 @@ Accounts.loginServiceConfiguration.remove({
 
 Accounts.loginServiceConfiguration.insert({
   service: "github",
-  clientId: "insert your clientId",
-  secret: "insert your secret"
+  clientId: "15a090a0117ac8a9ca64",
+  secret: "f6bff9a83200393120536e714badd5cba2853bb8"
 });
 
 Accounts.onCreateUser(function(options, user){

@@ -1,14 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Invite dialog
 
-var openInviteDialog = function () {
-  Session.set("showInviteDialog", true);
-};
-
-Template.page.showInviteDialog = function () {
-  return Session.get("showInviteDialog");
-};
-
 Template.inviteDialog.events({
   'click .invite': function (event, template) {
     Meteor.call('invite', Session.get("selected"), this._id);

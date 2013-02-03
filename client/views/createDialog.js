@@ -1,15 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Create Party dialog
 
-var openCreateDialog = function (x, y) {
-  Session.set("createCoords", {x: x, y: y});
-  Session.set("createError", null);
-  Session.set("showCreateDialog", true);
-};
-
-Template.page.showCreateDialog = function () {
-  return Session.get("showCreateDialog");
-};
 
 Template.createDialog.events({
   'click .save': function (event, template) {
