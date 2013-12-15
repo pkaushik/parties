@@ -39,7 +39,7 @@ Parties.allow({
   }
 });
 
-var attending = function (party) {
+attending = function (party) {
   return (_.groupBy(party.rsvps, 'rsvp').yes || []).length;
 };
 

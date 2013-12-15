@@ -15,10 +15,13 @@ Accounts.onCreateUser(function(options, user){
     profile;
   
 	console.log(accessToken);
-	  
-  result = Meteor.http.get('https://api.github.com/user?access_token=' + accessToken);
-  
-	console.log('here!!')
+	
+	result = Meteor.http.get("https://api.github.com/user", {
+    headers: {"User-Agent": "Meteor/1.0"},
+    params: {
+      access_token: accessToken
+    }
+  });
 	
   if (result.error) {
     throw error;

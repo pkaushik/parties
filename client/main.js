@@ -14,11 +14,11 @@ Meteor.startup(function () {
   });
 });
 
-var openInviteDialog = function () {
+openInviteDialog = function () {
   Session.set("showInviteDialog", true);
 };
 
-var openCreateDialog = function (x, y) {
+openCreateDialog = function (x, y) {
   Session.set("createCoords", {x: x, y: y});
   Session.set("createError", null);
   Session.set("showCreateDialog", true);
