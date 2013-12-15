@@ -16,7 +16,7 @@ Template.loggedout.events({
       requestPermissions: ["user", "public_repo"]
     }, function(err){
       if (err) {
-        // handle error
+        console.log(err)
       } else {
         // show an alert
       }

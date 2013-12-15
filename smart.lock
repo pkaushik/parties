@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "errors": {}
+    },
+    "packages": {
+      "errors": {
+        "git": "https://github.com/tmeasday/meteor-errors.git",
+        "tag": "v0.2.0",
+        "commit": "b7cc525c19defe2dc744e8e34d1328b430f3e03a"
+      }
+    }
+  }
+}
