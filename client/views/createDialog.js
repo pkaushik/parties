@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Create Party dialog
 
-
 Template.createDialog.events({
   'click .save': function (event, template) {
     var title = template.find(".title").value;

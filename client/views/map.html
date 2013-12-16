@@ -1,16 +1,11 @@
 <template name="map">
-  <div class="map">
-    {{#constant}}
+   {{#constant}}
+  <div id="map_canvas" class="map">
       <svg width="500" height="500">
         <circle class="callout" cx=-100 cy=-100></circle>
         <g class="circles"></g>
         <g class="labels"></g>
       </svg>
-    {{/constant}}
-    <div>
-      <small class="attribution muted">&copy;
-        <a href="http://www.openstreetmap.org/?lat=41.88137&lon=-87.6324&zoom=15&layers=M"
-           target="_blank">OpenStreetMap</a> contributors</small>
-    </div>
   </div>
+  {{/constant}}
 </template>

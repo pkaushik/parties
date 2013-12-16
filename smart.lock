@@ -2,13 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "errors": {}
+      "errors": {},
+      "leaflet": {}
     },
     "packages": {
       "errors": {
         "git": "https://github.com/tmeasday/meteor-errors.git",
         "tag": "v0.2.0",
         "commit": "b7cc525c19defe2dc744e8e34d1328b430f3e03a"
+      },
+      "leaflet": {
+        "git": "https://github.com/bevanhunt/meteor-leaflet.git",
+        "tag": "v0.1.8",
+        "commit": "8a3d0f53734e4fe3efc3e6e39aa3da0209e2ec8e"
       }
     }
   }
