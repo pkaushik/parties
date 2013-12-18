@@ -42,12 +42,16 @@ input.chosen {
     font-weight: bold;
 }
 
-.map {
+#map_canvas img {
+  max-width: none;
+}
+
+/*.map {
     position: relative;
     background-position: -20px -20px;
     width: 500px;
     height: 500px;
-}
+}*/
 
 .map circle.public {
     fill: #49AFCD;
