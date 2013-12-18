@@ -14,52 +14,29 @@ LeafletLib = {
 
     initialize: function(element, centroid, zoom, features) {
 
-      LeafletLib.map = L.map(element).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
-      LeafletLib.drawnItems = new L.FeatureGroup();
-      LeafletLib.markers = new L.markerClusterGroup();
+      LeafletLib.map = L.map(element, {
+//         dragging: false,
+//         zoomControl: false,
+         scrollWheelZoom: false,
+         doubleClickZoom: false,
+         boxZoom: false,
+         touchZoom: false
+      }).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
       
       LeafletLib.tiles = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg').addTo(LeafletLib.map);
 
       LeafletLib.map.attributionControl.setPrefix('');
       L.Icon.Default.imagePath = "css/images";
-
-      // LeafletLib.map.addControl(new L.Control.Draw({
-      //     edit: {
-      //       featureGroup: LeafletLib.drawnItems
-      //     },
-      //     draw: {
-      //       polyline: false
-      //     }
-      //   })
-      //      );
-  		
   		
   		var attribution = new L.Control.Attribution();
       attribution.addAttribution("Geocoding data &copy; 2013 <a href='http://open.mapquestapi.com'>MapQuest, Inc.</a>");
       attribution.addAttribution("Map tiles by <a href='http://stamen.com'>Stamen Design</a> under <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>.");
       attribution.addAttribution("Data by <a href='http://openstreetmap.org'>OpenStreetMap</a> under <a href='http://creativecommons.org/licenses/by-sa/3.0'>CC BY SA</a>.");
       LeafletLib.map.addControl(attribution);
-  		
-  		LeafletLib.map.addLayer(LeafletLib.drawnItems);
-  		
-  		LeafletLib.map.on("draw:created", function (e) {
-  			var queryParams = {"geometry" : JSON.stringify(e.layer.toGeoJSON().geometry)};
-  			
-  			$.when(LeafletLib.queryAPI(queryParams)).then(function(resp){
-  			  LeafletLib.drawFeatures(resp);
-  			});
-      });
       
       if (typeof features) {
         LeafletLib.drawFeatures(features);
       }
-    },
-    
-    queryAPI: function(data) {
-      return $.ajax({
-        url: '/servicerequests',
-        data: data,
-      })
     },
     
     drawFeatures: function(features) {

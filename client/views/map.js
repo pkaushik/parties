@@ -6,15 +6,6 @@ $(window).resize(function () {
   $('#map_canvas').css('height', (h - offsetTop));
 }).resize();
 
-$(function() {
-  LeafletLib.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
-
-  $('#reset').click(function(){
-    $.address.parameter('address','');
-    LeafletLib.initialize(); 
-    return false;
-  });
-});
 
 // Use jquery to get the position clicked relative to the map element.
 var coordsRelativeToElement = function (element, event) {
@@ -36,7 +27,9 @@ Template.map.events({
   }
 });
 
-Template.map.rendered = function () {  
+Template.map.rendered = function () { 
+  
+  LeafletLib.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13); 
     
   var self = this;
   self.node = self.find("svg");
