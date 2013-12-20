@@ -3,7 +3,8 @@
 
 $(window).resize(function () {
   var h = $(window).height(), offsetTop = 90; // Calculate the top offset
-  $('#map_canvas').css('height', (h - offsetTop));
+  $mc = $('#map_canvas');
+  $mc.css('height', (h - offsetTop));
 }).resize();
 
 
@@ -15,6 +16,10 @@ var coordsRelativeToElement = function (element, event) {
   return { x: x, y: y };
 };
 
+var coordsRelativeToLeaflet = function(coords) {
+  return LeafletLib.map.latLngToLayerPoint(new L.LatLng(coords.y, coords.x));
+}
+
 Template.map.events({
   'mousedown circle, mousedown text': function (event, template) {
     Session.set("selected", event.currentTarget.id);
@@ -22,8 +27,9 @@ Template.map.events({
   'dblclick .map': function (event, template) {
     if (! Meteor.userId()) // must be logged in to create events
       return;
-    var coords = coordsRelativeToElement(event.currentTarget, event);
-    openCreateDialog(coords.x / 500, coords.y / 500);
+    var coords = coordsRelativeToLeaflet(coordsRelativeToElement(event.currentTarget, event));
+    console.log(coords)
+    openCreateDialog(coords.x, coords.y);
   }
 });
 
@@ -32,9 +38,11 @@ Template.map.rendered = function () {
   $(window).resize(function () {
     var h = $(window).height(), offsetTop = 90; // Calculate the top offset
     $('#map_canvas').css('height', (h - offsetTop));
+    
   }).resize();
   
-  LeafletLib.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13); 
+  if (!LeafletLib.map) 
+    LeafletLib.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13); 
   var svg     = d3.select(LeafletLib.map.getPanes().overlayPane).append("svg");
   var circle  = svg.append("circle").attr("class", "callout").attr("cx", "-100").attr("cy", "-100");
   var zoom    = svg.append("g").attr("class", "leaflet-zoom-hide");
