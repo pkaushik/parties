@@ -44,6 +44,8 @@ input.chosen {
 
 #map_canvas img {
   max-width: none;
+  width: 960px;
+    height: 500px;
 }
 
 /*.map {

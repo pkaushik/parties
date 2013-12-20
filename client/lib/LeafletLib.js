@@ -1,6 +1,6 @@
 
 LeafletLib = {
-
+  
     latmin: 90,
     latmax: -90,
     lngmin: 180,
@@ -8,19 +8,15 @@ LeafletLib = {
 
     searchRadius: 805,
     locationScope:      "Chicago",      //geographical area appended to all address searches
-    recordName:         "open complaint",       //for showing number of results
-    recordNamePlural:   "open complaints",
     markers: [ ],
 
     initialize: function(element, centroid, zoom, features) {
 
       LeafletLib.map = L.map(element, {
-//         dragging: false,
-//         zoomControl: false,
-         scrollWheelZoom: false,
-         doubleClickZoom: false,
-         boxZoom: false,
-         touchZoom: false
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        touchZoom: false
       }).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
       
       LeafletLib.tiles = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg').addTo(LeafletLib.map);
