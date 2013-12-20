@@ -1,6 +1,8 @@
 {
   "packages": {
     "errors": {},
-    "leaflet": {}
+    "leaflet": {},
+    "bootstrap3-less": {},
+    "fittext": {}
   }
 }

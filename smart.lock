@@ -3,7 +3,9 @@
   "dependencies": {
     "basePackages": {
       "errors": {},
-      "leaflet": {}
+      "leaflet": {},
+      "bootstrap3-less": {},
+      "fittext": {}
     },
     "packages": {
       "errors": {
@@ -15,6 +17,16 @@
         "git": "https://github.com/bevanhunt/meteor-leaflet.git",
         "tag": "v0.1.8",
         "commit": "8a3d0f53734e4fe3efc3e6e39aa3da0209e2ec8e"
+      },
+      "bootstrap3-less": {
+        "git": "https://github.com/eprochasson/bootstrap3-less",
+        "tag": "v0.1.5",
+        "commit": "5074432c020ffc7a676a812e92104ce0fa96080f"
+      },
+      "fittext": {
+        "git": "https://github.com/dbubs/meteor-fittext.git",
+        "tag": "v1.2.0.2",
+        "commit": "025eb22b0b686ae8b6c03a8c8ef13e291084307b"
       }
     }
   }
