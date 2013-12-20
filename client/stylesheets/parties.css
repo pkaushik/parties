@@ -48,13 +48,6 @@ input.chosen {
     height: 500px;
 }
 
-/*.map {
-    position: relative;
-    background-position: -20px -20px;
-    width: 500px;
-    height: 500px;
-}*/
-
 .map circle.public {
     fill: #49AFCD;
 }
