@@ -4,12 +4,9 @@
     "basePackages": {
       "errors": {},
       "leaflet": {},
-<<<<<<< HEAD
       "font-awesome": {}
-=======
       "bootstrap3-less": {},
       "fittext": {}
->>>>>>> 66829b944967ee8342b956c2ec1516eefec933bd
     },
     "packages": {
       "errors": {
@@ -22,12 +19,11 @@
         "tag": "v0.1.8",
         "commit": "8a3d0f53734e4fe3efc3e6e39aa3da0209e2ec8e"
       },
-<<<<<<< HEAD
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
-=======
+      },
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
         "tag": "v0.1.5",
@@ -37,7 +33,6 @@
         "git": "https://github.com/dbubs/meteor-fittext.git",
         "tag": "v1.2.0.2",
         "commit": "025eb22b0b686ae8b6c03a8c8ef13e291084307b"
->>>>>>> 66829b944967ee8342b956c2ec1516eefec933bd
       }
     }
   }
