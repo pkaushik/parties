@@ -10,8 +10,7 @@ LeafletLib = {
     locationScope:      "Chicago",      //geographical area appended to all address searches
     markers: [ ],
 
-    initialize: function(element, centroid, zoom, features) {
-
+    initialize: function(element, centroid, zoom, features) {  
       LeafletLib.map = L.map(element, {
         scrollWheelZoom: false,
         doubleClickZoom: false,
@@ -34,6 +33,7 @@ LeafletLib = {
         LeafletLib.drawFeatures(features);
       }
     },
+    
     
     drawFeatures: function(features) {
       

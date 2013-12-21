@@ -6,14 +6,13 @@ Template.createDialog.events({
     var title = template.find(".title").value;
     var description = template.find(".description").value;
     var public = ! template.find(".private").checked;
-    var coords = Session.get("createCoords");
+    var latlng = Session.get("createCoords");
 
     if (title.length && description.length) {
       Meteor.call('createParty', {
         title: title,
         description: description,
-        x: coords.x,
-        y: coords.y,
+        latlng: latlng,
         public: public
       }, function (error, party) {
         if (! error) {

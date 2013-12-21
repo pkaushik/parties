@@ -1,6 +1,7 @@
 {
   "packages": {
     "errors": {},
-    "leaflet": {}
+    "leaflet": {},
+    "font-awesome": {}
   }
 }

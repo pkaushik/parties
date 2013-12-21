@@ -14,14 +14,9 @@ Meteor.startup(function () {
   });
 });
 
+
 openInviteDialog = function () {
   Session.set("showInviteDialog", true);
-};
-
-openCreateDialog = function (x, y) {
-  Session.set("createCoords", {x: x, y: y});
-  Session.set("createError", null);
-  Session.set("showCreateDialog", true);
 };
 
 
