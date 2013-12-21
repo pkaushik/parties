@@ -39,7 +39,7 @@
         createIcon: function () {
             var div = document.createElement('div'),
                 options = this.options;
-                console.log(options)
+                
             if (options.icon) {
                 div.innerHTML = this._createInner();
             }

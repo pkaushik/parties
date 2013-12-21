@@ -52,22 +52,30 @@ Template.map.rendered = function () {
           text: attending(party),
           markerColor: party.public ? 'red' : 'blue'
         })
-      });
-      
-      marker.on('click', function(e) {
+      }).on('click', function(e) {
         Session.set("selected", e.target.options.id);
       });
       
       // update default image path
       L.Icon.Default.imagePath = 'packages/leaflet/images';
       LeafletLib.addMarker(marker);
+      return marker;
+    },
+    changed: function(party, _party) {
+      _.each(LeafletLib.markers, function(m) {
+        if (m.options.id === party._id) {
+          m.setIcon(L.AwesomeMarkers.icon({
+            icon: 'text',
+            text: attending(party),
+            markerColor: party.public ? 'red' : 'blue'
+          }));
+        }
+      })
     },
     removed: function(party) {
       
     }
-  })  
-     
-
+  }) 
   
   //var self = this;
 
