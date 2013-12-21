@@ -14,8 +14,6 @@ var openCreateDialog = function (latlng) {
   Session.set("showCreateDialog", true);
 };
 
-
-
 var partyMarker = L.Marker.extend({
    options: { 
       public: true,
@@ -46,18 +44,14 @@ Template.map.rendered = function () {
   // now observe the collection 
   Parties.find({}).observe({
     added: function(party) {
-      var icon = L.AwesomeMarkers.icon({
-        icon: 'text',
-        text: '1',
-        markerColor: party.public ? 'darkred' : 'darkblue'
-      });
-      
       var marker = new partyMarker(party.latlng, {
         id: party._id,
         title: party.title,
-        icon: icon,
-        public: party.public,
-        attending: party.attending
+        icon: L.AwesomeMarkers.icon({
+          icon: 'text',
+          text: attending(party),
+          markerColor: party.public ? 'red' : 'blue'
+        })
       });
       
       marker.on('click', function(e) {
