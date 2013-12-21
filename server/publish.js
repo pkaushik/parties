@@ -8,3 +8,7 @@ Meteor.publish("parties", function () {
   return Parties.find(
     {$or: [{"public": true}, {invited: this.userId}, {owner: this.userId}]});
 });
+
+Meteor.publish("datafiles", function () {
+	return Datafiles.find({}, {fields: {name: 1, file: 1}});
+});
