@@ -62,26 +62,6 @@ input.chosen {
     font-weight: bold;
 }
 
-#map_canvas img {
-  max-width: none;
-  width: 960px;
-    height: 500px;
-}
-
-.map circle.public {
-    fill: #49AFCD;
-}
-
-.map circle.private {
-    fill: #DA4F49;
-}
-
-.map text {
-    text-anchor: middle;
-    fill: white;
-    font-weight: bold;
-}
-
 .map circle.callout {
     stroke-width: 5px;
     stroke-dasharray: 9, 5;

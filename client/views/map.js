@@ -32,25 +32,22 @@ Template.map.created = function() {
       added: function(party) {
         console.log('added: ' + party._id)
         var marker = new L.Marker(party.latlng, {
-          id: party._id,
+          _id: party._id,
           icon: createIcon(party)
         }).on('click', function(e) {
           Session.set("selected", e.target.options.id);
         });
       
         // update default image path
-        LeafletLib.addMarker(marker);
+        LL.addMarker(marker);
         return marker;
       },
-      changed: function(party, _party) {
-        _.each(LeafletLib.markers, function(m) {
-          if (m.options.id === party._id) {
-            m.setIcon(createIcon(party));
-          }
-        })
+      changed: function(party) {
+        var marker = LL.markers[party._id];
+        if (marker) marker.setIcon(createIcon(party));
       },
       removed: function(party) {
-        // todo
+        LL.removeMarker(party._id);
       }
     }) 
   }
@@ -65,10 +62,10 @@ Template.map.rendered = function () {
   }).resize();
   
   // initialize map events
-  if (!LeafletLib.map) {
-    LeafletLib.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
+  if (!LL.map) {
+    LL.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
     
-    LeafletLib.map.on("dblclick", function(e) {
+    LL.map.on("dblclick", function(e) {
       if (! Meteor.userId()) // must be logged in to create parties
         return;
         
