@@ -178,6 +178,12 @@ LeafletLib = {
         LeafletLib.addBoundedPoint( marker.getLatLng() );
         LeafletLib.markers.push( marker );
     },
+    
+    // removeMarker: function( marker ){
+    //     LeafletLib.map.addLayer(marker);
+    //     LeafletLib.addBoundedPoint( marker.getLatLng() );
+    //     LeafletLib.markers.push( marker );
+    // },
 
     ptInShape: function( pt, shape ){
         if( typeof shape.rectangle != "undefined" ){
