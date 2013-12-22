@@ -12,9 +12,6 @@ LL = {
       }).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
       
       L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {opacity: .5}).addTo(LL.map);
-      
-      LL.markerCluster = new L.markerClusterGroup();
-      LL.map.addLayer(LL.markerCluster);
 
       LL.map.attributionControl.setPrefix('');
   		var attribution = new L.Control.Attribution();
@@ -25,7 +22,7 @@ LL = {
     },
 
     addMarker: function( marker ){
-      LL.markerCluster.addLayer(marker);
+      LL.map.addLayer(marker);
       LL.markers[marker.options._id] = marker;
     },
     
