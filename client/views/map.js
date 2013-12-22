@@ -14,12 +14,47 @@ var openCreateDialog = function (latlng) {
   Session.set("showCreateDialog", true);
 };
 
-var partyMarker = L.Marker.extend({
-   options: { 
-      public: true,
-      attending: 1
-   }
-});
+
+var createIcon = function(party) {
+  var className = 'leaflet-div-icon ';
+  className += party.public ? 'public' : 'private';
+  return L.divIcon({
+    iconSize: null,
+    html: '<b>' + attending(party) + '</b>',
+    className: className  
+  });
+}
+
+Template.map.created = function() {
+  var self = this;
+  if (!self.handle) {
+    self.handle = Parties.find({}).observe({
+      added: function(party) {
+        console.log('added: ' + party._id)
+        var marker = new L.Marker(party.latlng, {
+          id: party._id,
+          icon: createIcon(party)
+        }).on('click', function(e) {
+          Session.set("selected", e.target.options.id);
+        });
+      
+        // update default image path
+        LeafletLib.addMarker(marker);
+        return marker;
+      },
+      changed: function(party, _party) {
+        _.each(LeafletLib.markers, function(m) {
+          if (m.options.id === party._id) {
+            m.setIcon(createIcon(party));
+          }
+        })
+      },
+      removed: function(party) {
+        // todo
+      }
+    }) 
+  }
+}
 
 Template.map.rendered = function () { 
   
@@ -40,42 +75,7 @@ Template.map.rendered = function () {
       openCreateDialog(e.latlng);
     });
   }
-   
-  // now observe the collection 
-  Parties.find({}).observe({
-    added: function(party) {
-      var marker = new partyMarker(party.latlng, {
-        id: party._id,
-        title: party.title,
-        icon: L.AwesomeMarkers.icon({
-          icon: 'text',
-          text: attending(party),
-          markerColor: party.public ? 'red' : 'blue'
-        })
-      }).on('click', function(e) {
-        Session.set("selected", e.target.options.id);
-      });
-      
-      // update default image path
-      L.Icon.Default.imagePath = 'packages/leaflet/images';
-      LeafletLib.addMarker(marker);
-      return marker;
-    },
-    changed: function(party, _party) {
-      _.each(LeafletLib.markers, function(m) {
-        if (m.options.id === party._id) {
-          m.setIcon(L.AwesomeMarkers.icon({
-            icon: 'text',
-            text: attending(party),
-            markerColor: party.public ? 'red' : 'blue'
-          }));
-        }
-      })
-    },
-    removed: function(party) {
-      
-    }
-  }) 
+  
   
   //var self = this;
 

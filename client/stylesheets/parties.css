@@ -17,6 +17,26 @@
     z-index: 1;
 }
 
+.leaflet-div-icon {
+    border-radius: 50%;
+    border: none;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    font-family: verdana;
+    text-align: center;
+    color: white;
+    opacity: .8;
+}
+
+.leaflet-div-icon.public {
+    background: #49AFCD;
+}
+
+.leaflet-div-icon.private {
+    background: #DA4F49;
+}
+
 .invite-row .invite {
     margin: 10px 10px 10px 0;
 }

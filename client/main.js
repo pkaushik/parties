@@ -3,7 +3,6 @@
 Meteor.subscribe("directory");
 Meteor.subscribe("parties");
 
-// If no party selected, select one.
 Meteor.startup(function () {
   Meteor.autorun(function () {
     if (! Session.get("selected")) {
