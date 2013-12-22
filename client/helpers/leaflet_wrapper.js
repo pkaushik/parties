@@ -4,7 +4,6 @@ LL = {
     markers: [ ],
 
     initialize: function(element, centroid, zoom, features) { 
-      console.log('map initialize called!!') 
       LL.map = L.map(element, {
         scrollWheelZoom: false,
         doubleClickZoom: false,
@@ -12,10 +11,12 @@ LL = {
         touchZoom: false
       }).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
       
-      LL.tiles = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {opacity: .5}).addTo(LL.map);
+      L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {opacity: .5}).addTo(LL.map);
+      
+      LL.markerCluster = new L.markerClusterGroup();
+      LL.map.addLayer(LL.markerCluster);
 
       LL.map.attributionControl.setPrefix('');
-  		
   		var attribution = new L.Control.Attribution();
       attribution.addAttribution("Geocoding data &copy; 2013 <a href='http://open.mapquestapi.com'>MapQuest, Inc.</a>");
       attribution.addAttribution("Map tiles by <a href='http://stamen.com'>Stamen Design</a> under <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>.");
@@ -24,7 +25,7 @@ LL = {
     },
 
     addMarker: function( marker ){
-      LL.map.addLayer(marker);
+      LL.markerCluster.addLayer(marker);
       LL.markers[marker.options._id] = marker;
     },
     
