@@ -7,8 +7,9 @@ Meteor.startup(function () {
   Meteor.autorun(function () {
     if (! Session.get("selected")) {
       var party = Parties.findOne();
-      if (party)
+      if (party) {
         Session.set("selected", party._id);
+      }
     }
   });
 });
