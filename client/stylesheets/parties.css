@@ -17,16 +17,22 @@
     z-index: 1;
 }
 
+.leaflet-animated-icon {
+  border-radius: 50%;
+  border: none;
+  opacity: .2;
+  background: black;
+}
+
 .leaflet-div-icon {
     border-radius: 50%;
     border: none;
-    height: 30px;
-    width: 30px;
     line-height: 30px;
     font-family: verdana;
     text-align: center;
     color: white;
     opacity: .8;
+    vertical-align:middle;
 }
 
 .leaflet-div-icon.public {

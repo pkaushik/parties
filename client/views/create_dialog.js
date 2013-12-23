@@ -9,12 +9,14 @@ Template.createDialog.events({
     var latlng = Session.get("createCoords");
 
     if (title.length && description.length) {
+      console.log('about to Meteor.call createParty')
       Meteor.call('createParty', {
         title: title,
         description: description,
         latlng: latlng,
         public: public
       }, function (error, party) {
+        console.log('returned from Meteor.call createParty')
         if (! error) {
           Session.set("selected", party);
           if (! public && Meteor.users.find().count() > 1)

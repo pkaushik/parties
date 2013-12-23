@@ -19,42 +19,35 @@ var createIcon = function(party) {
   var className = 'leaflet-div-icon ';
   className += party.public ? 'public' : 'private';
   return L.divIcon({
-    iconSize: null,
+    iconSize: [30, 30],
     html: '<b>' + attending(party) + '</b>',
     className: className  
   });
 }
 
 Template.map.created = function() {
-  var self = this;
-  if (!self.handle) {
-    self.handle = Parties.find({}).observe({
-      added: function(party) {
-        console.log(party)
-        var marker = new L.Marker(party.latlng, {
-          _id: party._id,
-          icon: createIcon(party)
-        }).on('click', function(e) {
-          Session.set("selected", e.target.options.id);
-        });
-      
-        // update default image path
-        LL.addMarker(marker);
-        return marker;
-      },
-      changed: function(party) {
-        var marker = LL.markers[party._id];
-        if (marker) marker.setIcon(createIcon(party));
-      },
-      removed: function(party) {
-        LL.removeMarker(party._id);
-      }
-    }) 
-  }
+  Parties.find({}).observe({
+    added: function(party) {
+      var marker = new L.Marker(party.latlng, {
+        _id: party._id,
+        icon: createIcon(party)
+      }).on('click', function(e) {
+        Session.set("selected", e.target.options._id);
+      });      
+      LL.addMarker(marker);
+    },
+    changed: function(party) {
+      var marker = LL.markers[party._id];
+      if (marker) marker.setIcon(createIcon(party));
+    },
+    removed: function(party) {
+      LL.removeMarker(party._id);
+    }
+  });
 }
 
+
 Template.map.rendered = function () { 
-  
   // basic housekeeping
   $(window).resize(function () {
     var h = $(window).height(), offsetTop = 90; // Calculate the top offset
@@ -71,76 +64,33 @@ Template.map.rendered = function () {
         
       openCreateDialog(e.latlng);
     });
-  }
-  
-  
-  var self = this;
-
-  
-  if (! self.handle) {
-    self.handle = Meteor.autorun(function () {
-      var selected = Session.get('selected');
-      var selectedParty = selected && Parties.findOne(selected); 
-      console.log("autorun: " + selectedParty._id);
-//       
-//       var radius = function (party) {
-//         return 10 + Math.sqrt(attending(party)) * 10;
-//       };
-//         
-//       // Draw a circle for each party
-//       var updateCircles = function (group) {
-//         group.attr("id", function (party) { return party._id; })
-//         .attr("cx", function (party) { return party.x * 500; })
-//         .attr("cy", function (party) { return party.y * 500; })
-//         .attr("r", radius)
-//         .attr("class", function (party) {
-//           return party.public ? "public" : "private";
-//         })
-//         .style('opacity', function (party) {
-//           return selected === party._id ? 1 : 0.6;
-//         });
-//       };
-//         
-//       var circles = d3.select(self.node).select(".circles").selectAll("circle")
-//         .data(Parties.find().fetch(), function (party) { return party._id; });
-//         
-//       updateCircles(circles.enter().append("circle"));
-//       updateCircles(circles.transition().duration(250).ease("cubic-out"));
-//       circles.exit().transition().duration(250).attr("r", 0).remove();
-//         
-//       // Label each with the current attendance count
-//       var updateLabels = function (group) {
-//         group.attr("id", function (party) { return party._id; })
-//         .text(function (party) {return attending(party) || '';})
-//         .attr("x", function (party) { return party.x * 500; })
-//         .attr("y", function (party) { return party.y * 500 + radius(party)/2 })
-//         .style('font-size', function (party) {
-//           return radius(party) * 1.25 + "px";
-//         });
-//       };
-//         
-//       var labels = d3.select(self.node).select(".labels").selectAll("text")
-//         .data(Parties.find().fetch(), function (party) { return party._id; });
-//         
-//       updateLabels(labels.enter().append("text"));
-//       updateLabels(labels.transition().duration(250).ease("cubic-out"));
-//       labels.exit().remove();
-//         
-//       // Draw a dashed circle around the currently selected party, if any
-//       var callout = d3.select(self.node).select("circle.callout")
-//         .transition().duration(250).ease("cubic-out");
-//       if (selectedParty)
-//         callout.attr("cx", selectedParty.x * 500)
-//         .attr("cy", selectedParty.y * 500)
-//         .attr("r", radius(selectedParty) + 10)
-//         .attr("class", "callout")
-//         .attr("display", '');
-//       else
-//         callout.attr("display", 'none');
-    });
+    
+    
+    var self = this;
+    Meteor.autorun(function() {
+      var selectedParty = Parties.findOne(Session.get("selected"));
+      if (selectedParty) {
+        if (!self.animatedMarker) {
+          var line = L.polyline([[selectedParty.latlng.lat, selectedParty.latlng.lng]]);
+          self.animatedMarker = L.animatedMarker(line.getLatLngs(), {
+            autoStart: false,
+            distance: 3000,  // meters
+            interval: 200, // milliseconds
+            icon: L.divIcon({
+              iconSize: [50, 50],
+              className: 'leaflet-animated-icon'
+            })
+          });
+          LL.map.addLayer(self.animatedMarker);
+        } else {
+          // animate to here
+          var line = L.polyline([[self.animatedMarker.getLatLng().lat, self.animatedMarker.getLatLng().lng],
+            [selectedParty.latlng.lat, selectedParty.latlng.lng]]);
+          self.animatedMarker.setLine(line.getLatLngs());
+          self.animatedMarker.start();
+        } 
+      }
+    })
   }
 };
 
-Template.map.destroyed = function () {
-  this.handle && this.handle.stop();
-};
