@@ -2,7 +2,7 @@
   "packages": {
     "errors": {},
     "leaflet": {},
-    "font-awesome": {}
+    "font-awesome": {},
     "bootstrap3-less": {},
     "fittext": {}
   }
