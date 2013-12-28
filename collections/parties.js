@@ -54,7 +54,7 @@ Meteor.methods({
     if (! this.userId)
       throw new Meteor.Error(403, "You must be logged in");
 
-    var partyId = Parties.insert({
+    return Parties.insert({
       owner: this.userId,
       latlng: options.latlng,
       title: options.title,
@@ -63,12 +63,6 @@ Meteor.methods({
       invited: [],
       rsvps: []
     });
-    
-    //Parties.findOne(party)
-    console.log(partyId + " isServer=" + Meteor.isServer)
-    
-    return partyId;
-    
   },
 
   invite: function (partyId, userId) {

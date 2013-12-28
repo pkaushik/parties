@@ -11,7 +11,7 @@ LL = {
         touchZoom: false
       }).setView(new L.LatLng( centroid[0], centroid[1] ), zoom);
       
-      L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {opacity: .5}).addTo(LL.map);
+      L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5}).addTo(LL.map);
 
       LL.map.attributionControl.setPrefix('');
   		var attribution = new L.Control.Attribution();
