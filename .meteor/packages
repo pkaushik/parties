@@ -4,14 +4,10 @@
 # but you can also edit it by hand.
 
 preserve-inputs
-d3
 bootstrap
-email
 http
-errors
 standard-app-packages
 accounts-password
 accounts-github
 leaflet
 insecure
-font-awesome
