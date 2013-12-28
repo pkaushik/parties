@@ -7,13 +7,37 @@ $(window).resize(function () {
   $mc.css('height', (h - offsetTop));
 }).resize();
 
+var map, markers = [ ];
 
-var openCreateDialog = function (latlng) {
-  Session.set("createCoords", latlng);
-  Session.set("createError", null);
-  Session.set("showCreateDialog", true);
-};
+var initialize = function(element, centroid, zoom, features) { 
+  map = L.map(element, {
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    touchZoom: false
+  }).setView(new L.LatLng(centroid[0], centroid[1]), zoom);
+  
+  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5}).addTo(map);
 
+  map.attributionControl.setPrefix('');
+  
+	var attribution = new L.Control.Attribution();
+  attribution.addAttribution("Geocoding data &copy; 2013 <a href='http://open.mapquestapi.com'>MapQuest, Inc.</a>");
+  attribution.addAttribution("Map tiles by <a href='http://stamen.com'>Stamen Design</a> under <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>.");
+  attribution.addAttribution("Data by <a href='http://openstreetmap.org'>OpenStreetMap</a> under <a href='http://creativecommons.org/licenses/by-sa/3.0'>CC BY SA</a>.");
+  
+  map.addControl(attribution);
+}
+
+var addMarker = function(marker) {
+  map.addLayer(marker);
+  markers[marker.options._id] = marker;
+}
+
+var removeMarker = function(_id) {
+  var marker = markers[_id];
+  if (map.hasLayer(marker)) map.removeLayer(marker);
+}
 
 var createIcon = function(party) {
   var className = 'leaflet-div-icon ';
@@ -25,6 +49,12 @@ var createIcon = function(party) {
   });
 }
 
+var openCreateDialog = function (latlng) {
+  Session.set("createCoords", latlng);
+  Session.set("createError", null);
+  Session.set("showCreateDialog", true);
+};
+
 Template.map.created = function() {
   Parties.find({}).observe({
     added: function(party) {
@@ -34,14 +64,14 @@ Template.map.created = function() {
       }).on('click', function(e) {
         Session.set("selected", e.target.options._id);
       });      
-      LL.addMarker(marker);
+      addMarker(marker);
     },
     changed: function(party) {
-      var marker = LL.markers[party._id];
+      var marker = markers[party._id];
       if (marker) marker.setIcon(createIcon(party));
     },
     removed: function(party) {
-      LL.removeMarker(party._id);
+      removeMarker(party._id);
     }
   });
 }
@@ -55,10 +85,10 @@ Template.map.rendered = function () {
   }).resize();
   
   // initialize map events
-  if (!LL.map) {
-    LL.initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
+  if (!map) {
+    initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
     
-    LL.map.on("dblclick", function(e) {
+    map.on("dblclick", function(e) {
       if (! Meteor.userId()) // must be logged in to create parties
         return;
         
@@ -81,7 +111,7 @@ Template.map.rendered = function () {
               className: 'leaflet-animated-icon'
             })
           });
-          LL.map.addLayer(self.animatedMarker);
+          map.addLayer(self.animatedMarker);
         } else {
           // animate to here
           var line = L.polyline([[self.animatedMarker.getLatLng().lat, self.animatedMarker.getLatLng().lng],
