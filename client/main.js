@@ -15,8 +15,3 @@ Meteor.startup(function () {
 });
 
 
-openInviteDialog = function () {
-  Session.set("showInviteDialog", true);
-};
-
-

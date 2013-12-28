@@ -18,7 +18,7 @@ Template.createDialog.events({
         if (! error) {
           Session.set("selected", party);
           if (! public && Meteor.users.find().count() > 1)
-            openInviteDialog();
+            Session.set("showInviteDialog", true);
         }
       });
       Session.set("showCreateDialog", false);

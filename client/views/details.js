@@ -42,7 +42,7 @@ Template.details.events({
     return false;
   },
   'click .invite': function () {
-    openInviteDialog();
+    Session.set("showInviteDialog", true);
     return false;
   },
   'click .remove': function () {
