@@ -17,7 +17,7 @@
     z-index: 1;
 }
 
-.leaflet-animated-icon {
+.leaflet-animated-div-icon {
   border-radius: 50%;
   border: none;
   opacity: .2;

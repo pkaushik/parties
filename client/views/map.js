@@ -17,7 +17,7 @@ var initialize = function(element, centroid, zoom, features) {
     touchZoom: false
   }).setView(new L.LatLng(centroid[0], centroid[1]), zoom);
   
-  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5}).addTo(map);
+  L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png').addTo(map);
 
   map.attributionControl.setPrefix('');
   
@@ -108,7 +108,7 @@ Template.map.rendered = function () {
             interval: 200, // milliseconds
             icon: L.divIcon({
               iconSize: [50, 50],
-              className: 'leaflet-animated-icon'
+              className: 'leaflet-animated-div-icon'
             })
           });
           map.addLayer(self.animatedMarker);
