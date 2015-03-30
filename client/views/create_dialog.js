@@ -33,7 +33,9 @@ Template.createDialog.events({
   }
 });
 
-Template.createDialog.error = function () {
-  return Session.get("createError");
-};
+Template.createDialog.helpers({
+  error: function () {
+    return Session.get("createError");
+  }
+});
 

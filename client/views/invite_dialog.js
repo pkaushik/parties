@@ -11,14 +11,15 @@ Template.inviteDialog.events({
   }
 });
 
-Template.inviteDialog.uninvited = function () {
-  var party = Parties.findOne(Session.get("selected"));
-  if (! party)
-    return []; // party hasn't loaded yet
-  return Meteor.users.find({$nor: [{_id: {$in: party.invited}},
-                                   {_id: party.owner}]});
-};
-
-Template.inviteDialog.displayName = function () {
-  return displayName(this);
-};
+Template.inviteDialog.helpers({
+  uninvited: function () {
+    var party = Parties.findOne(Session.get("selected"));
+    if (! party)
+      return []; // party hasn't loaded yet
+    return Meteor.users.find({$nor: [{_id: {$in: party.invited}},
+                                     {_id: party.owner}]});
+  },
+  displayName: function () {
+    return displayName(this);
+  }
+});

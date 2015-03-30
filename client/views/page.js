@@ -1,7 +1,8 @@
-Template.page.showInviteDialog = function () {
-  return Session.get("showInviteDialog");
-};
-
-Template.page.showCreateDialog = function () {
-  return Session.get("showCreateDialog");
-};
+Template.page.helpers({
+  showInviteDialog: function () {
+    return Session.get("showInviteDialog");
+  },
+  showCreateDialog: function () {
+    return Session.get("showCreateDialog");
+  }
+});
