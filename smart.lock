@@ -8,13 +8,13 @@
     "packages": {
       "leaflet": {
         "git": "https://github.com/bevanhunt/meteor-leaflet.git",
-        "tag": "v0.1.8",
-        "commit": "8a3d0f53734e4fe3efc3e6e39aa3da0209e2ec8e"
+        "tag": "v0.3.6",
+        "commit": "d9e3bdb824145c1078e52945909bb1cf38724da5"
       },
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
-        "tag": "v0.1.8",
-        "commit": "48b6db4435d9f01a1fcfe694a180b38e8e38835b"
+        "tag": "v0.1.9",
+        "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
       }
     }
   }
