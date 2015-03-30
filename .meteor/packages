@@ -5,9 +5,9 @@
 
 bootstrap
 http
-standard-app-packages
 accounts-password
 accounts-github
 leaflet
 insecure
 service-configuration
+standard-app-packages
