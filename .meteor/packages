@@ -7,7 +7,7 @@ bootstrap
 http
 accounts-password
 accounts-github
-leaflet
 insecure
 service-configuration
 standard-app-packages
+bevanhunt:leaflet

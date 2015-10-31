@@ -4,6 +4,7 @@ accounts-oauth@1.1.4
 accounts-password@1.1.0
 autoupdate@1.2.0
 base64@1.0.3
+bevanhunt:leaflet@1.2.1
 binary-heap@1.0.3
 blaze@2.1.0
 blaze-tools@1.0.3
@@ -26,7 +27,6 @@ insecure@1.0.3
 jquery@1.11.3_2
 json@1.0.3
 launch-screen@1.0.2
-leaflet@0.0.0
 livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
