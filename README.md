@@ -1,8 +1,8 @@
 parties
 =======
 
-Meteor Parties example refactored
-- use github for login
-- use Leaflet for map
+Meteor Parties example upgraded
+- uses github login
+- uses Leaflet map
 
 
